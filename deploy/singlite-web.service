@@ -1,0 +1,36 @@
+[Unit]
+Description=Singlite HTTPS reverse proxy
+After=network-online.target singlite-panel.service
+Wants=network-online.target singlite-panel.service
+
+[Service]
+Type=notify
+DynamicUser=true
+EnvironmentFile=/etc/singlite/panel.env
+# DynamicUser has no regular home; Caddy still requires HOME alongside XDG paths.
+Environment=HOME=/var/lib/singlite-web
+Environment=XDG_DATA_HOME=/var/lib/singlite-web
+Environment=XDG_CONFIG_HOME=/var/lib/singlite-web
+StateDirectory=singlite-web
+StateDirectoryMode=0700
+ExecStart=/opt/singlite/bin/caddy run --config /etc/singlite/Caddyfile --adapter caddyfile
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=5
+LimitNOFILE=65536
+UMask=0077
+NoNewPrivileges=true
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictSUIDSGID=true
+LockPersonality=true
+
+[Install]
+WantedBy=multi-user.target

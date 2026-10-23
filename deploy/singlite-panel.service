@@ -1,0 +1,33 @@
+[Unit]
+Description=Singlite single-machine panel and accounting
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/opt/singlite
+EnvironmentFile=/etc/singlite/panel.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/usr/bin/python3 /opt/singlite/server/panel.py
+ExecStopPost=-/usr/bin/systemctl stop singlite-core.service singlite-node@*.service
+TimeoutStopSec=75
+Restart=on-failure
+RestartSec=3
+UMask=0077
+NoNewPrivileges=true
+CapabilityBoundingSet=
+ProtectSystem=strict
+ReadWritePaths=/var/lib/singlite
+ProtectHome=true
+PrivateTmp=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictSUIDSGID=true
+LockPersonality=true
+
+[Install]
+WantedBy=multi-user.target

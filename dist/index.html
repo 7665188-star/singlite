@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f7f9">
+  <meta name="description" content="Singlite，一个面板直接管理所在 VPS 的轻量 sing-box 节点面板。">
+  <title>Singlite · Proxy</title>
+  <link rel="stylesheet" href="./styles.css?v=3.1.1-final">
+</head>
+<body>
+  <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 21v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6M18 15a5 5 0 0 1 3 5"/></symbol>
+    <symbol id="i-nodes" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7h.01M7 17h.01M16 7h2M16 17h2"/></symbol>
+    <symbol id="i-logs" viewBox="0 0 24 24"><path d="M9 4h10a2 2 0 0 1 2 2v14H5a2 2 0 0 1-2-2V8h4V4a2 2 0 0 1 2-2"/><path d="M7 8v10a2 2 0 0 1-2 2M11 8h6M11 12h6M11 16h4"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="m9.5 3-.8 2.4-2.1 1.2-2.5-.5-2.5 4.3L3.3 12v2.4l-1.7 1.8 2.5 4.3 2.5-.5 2.1 1.2.8 2.4h5l.8-2.4 2.1-1.2 2.5.5 2.5-4.3-1.7-1.8V12l1.7-1.8-2.5-4.3-2.5.5-2.1-1.2L14.5 3z" transform="translate(1 0) scale(.92)"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 4.2-3 7.2-8 9-5-1.8-8-4.8-8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="m13 2-9 12h7l-1 8 10-13h-8z"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="8" rx="2"/><rect x="3" y="13" width="18" height="8" rx="2"/><path d="M7 7h.01M7 17h.01M14 7h3M14 17h3"/></symbol>
+    <symbol id="i-activity" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24"><path d="m5 7 5 5-5 5M13 17h6"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7h.01"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 8a8 8 0 0 0-13.5-3L3 8m0-5v5h5M4 16a8 8 0 0 0 13.5 3L21 16m0 5v-5h-5"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="m15 5 4 4M4 20l4-1L20 7a2.8 2.8 0 0 0-4-4L4 15z"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 2v10M6 5a9 9 0 1 0 12 0"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6C8 3 4 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-2-1-6-1-10 2zm0 0v15"/></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h4M14 7l5 5-5 5M8 12h13"/></symbol>
+  </svg>
+
+  <div id="gate" class="gate"><div class="initial-loading"><span class="loader"></span><span>正在连接 Singlite…</span></div></div>
+
+  <div id="app" class="app" hidden>
+    <div class="sidebar-scrim" id="sidebar-scrim"></div>
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#nodes" aria-label="Singlite 首页">
+        <span class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 36 36" fill="none"><path d="M23.5 5H15L5 18h11.5L12.5 31H21l10-13H19.5z" fill="currentColor"/></svg></span>
+        <span class="brand-text">singlite<span>轻量 · 自由 · 连接</span></span>
+      </a>
+      <div class="nav-label">本机面板</div>
+      <nav class="nav" aria-label="主导航">
+        <a href="#nodes" data-nav="nodes" class="active"><svg class="icon"><use href="#i-nodes"/></svg><span>节点管理</span><span id="nav-node-count" class="nav-count">2</span></a>
+        <a href="#users" data-nav="users"><svg class="icon"><use href="#i-users"/></svg><span>用户管理</span><span id="nav-user-count" class="nav-count">0</span></a>
+        <a href="#conversions" data-nav="conversions"><svg class="icon"><use href="#i-refresh"/></svg><span>订阅转换</span><span id="nav-conversion-count" class="nav-count">0</span></a>
+        <a href="#logs" data-nav="logs"><svg class="icon"><use href="#i-logs"/></svg><span>运行日志</span></a>
+        <a href="#settings" data-nav="settings"><svg class="icon"><use href="#i-settings"/></svg><span>面板设置</span></a>
+      </nav>
+      <div class="sidebar-note">
+        <div class="sidebar-note-icon"><svg class="icon"><use href="#i-shield"/></svg></div>
+        <p>少一点繁琐<br><strong>多一点自由。</strong></p>
+        <span>只专注于简单、可靠的连接</span>
+        <button class="text-button" data-action="guide">了解部署<svg class="icon"><use href="#i-arrow"/></svg></button>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="server-avatar"><svg class="icon"><use href="#i-server"/></svg><span id="sidebar-dot" class="status-dot"></span></div>
+        <div class="sidebar-server"><strong id="sidebar-hostname">本地交互预览</strong><span id="sidebar-server-status">尚未连接服务器</span></div>
+        <button class="icon-button" data-action="goto" data-page="settings" aria-label="本机设置"><svg class="icon"><use href="#i-down"/></svg></button>
+      </div>
+      <div class="sidebar-version">Singlite <span>v3.1.1</span><span class="version-dot"></span> Single VPS</div>
+    </aside>
+
+    <div class="main-shell">
+      <header class="topbar">
+        <div class="breadcrumb"><button id="mobile-menu" class="icon-button mobile-menu" aria-label="打开导航"><svg class="icon"><use href="#i-menu"/></svg></button><span class="breadcrumb-home">本机面板</span><span class="breadcrumb-divider">/</span><strong id="breadcrumb-page">节点管理</strong></div>
+        <div class="topbar-actions"><span class="mode-badge" id="mode-badge"><span></span>演示模式</span><span class="topbar-divider"></span><button class="help-button" data-action="guide"><svg class="icon"><use href="#i-book"/></svg><span>部署指南</span></button><button id="logout-button" class="icon-button" data-action="logout" aria-label="退出登录" hidden><svg class="icon"><use href="#i-logout"/></svg></button><span class="profile-avatar" aria-label="管理员">S</span></div>
+      </header>
+      <main id="main" class="main" tabindex="-1"></main>
+      <footer class="footer"><span>轻一点，自由连接。</span><span>Crafted for simplicity <span class="footer-spark">✦</span></span></footer>
+    </div>
+  </div>
+  <div id="modal-root"></div>
+  <div id="toast-root" class="toast-root" aria-live="polite" aria-atomic="true"></div>
+  <script src="./app.js?v=3.1.1-final"></script>
+</body>
+</html>

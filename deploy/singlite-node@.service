@@ -1,0 +1,26 @@
+[Unit]
+Description=Singlite node %i
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=/var/lib/singlite/nodes/%i.json
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/var/lib/singlite
+ExecStart=/opt/singlite/bin/sing-box run -c /var/lib/singlite/nodes/%i.json
+Restart=on-failure
+RestartSec=3
+LimitNOFILE=65536
+UMask=0077
+NoNewPrivileges=true
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX AF_NETLINK
+RestrictSUIDSGID=true

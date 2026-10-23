@@ -1,0 +1,39 @@
+# Python and local development files
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store
+
+# Credentials and runtime configuration
+.env
+.env.*
+!.env.example
+panel.env
+admin.json
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Runtime state and private backups
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+*.log
+data/
+nodes/
+backups/
+singlite-backup-*.tar.gz
+singlite-single-backup.tar.gz
+
+# Generated installation packages (keep the web files in dist)
+/dist/singlite-panel.tar.gz
+/dist/singlite-panel.tar.gz.sha256
